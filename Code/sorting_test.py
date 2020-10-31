@@ -3,7 +3,7 @@
 from sorting import random_ints
 from sorting_iterative import is_sorted, bubble_sort, selection_sort, insertion_sort
 
-sort = selection_sort
+sort = insertion_sort
 
 
 def test_is_sorted_on_sorted_integers():
@@ -14,12 +14,16 @@ def test_is_sorted_on_sorted_integers():
     assert is_sorted([3, 5]) is True
     assert is_sorted([3, 5, 7]) is True
 
+    assert is_sorted([3, 5, 7, 9]) is True
+
 
 def test_is_sorted_on_unsorted_integers():
     # Negative test cases (counterexamples) with lists of unsorted integers
     assert is_sorted([5, 3]) is False
     assert is_sorted([3, 5, 2]) is False
     assert is_sorted([7, 5, 3]) is False
+
+    assert is_sorted([7, 5, 3, 4]) is False
 
 
 def test_is_sorted_on_sorted_strings():
@@ -29,12 +33,16 @@ def test_is_sorted_on_sorted_strings():
     assert is_sorted(['A', 'C']) is True
     assert is_sorted(['A', 'B', 'C']) is True
 
+    assert is_sorted(['A', 'B', 'C', 'D', 'E']) is True
+
 
 def test_is_sorted_on_unsorted_strings():
     # Negative test cases (counterexamples) with lists of unsorted strings
     assert is_sorted(['B', 'A']) is False
     assert is_sorted(['D', 'A', 'C']) is False
     assert is_sorted(['C', 'B', 'A']) is False
+
+    assert is_sorted(['C', 'B', 'A', 'Z']) is False
 
 
 def test_sort_on_empty_list():
@@ -53,6 +61,10 @@ def test_sort_on_small_lists_of_integers():
     items3 = [5, 7, 3]
     sort(items3)
     assert items3 == [3, 5, 7]
+
+    items4 = [6, 2, 7, 8]
+    sort(items4)
+    assert items4 == [2, 6, 7, 8]
 
 
 def test_sort_on_lists_of_random_integers():
@@ -74,6 +86,12 @@ def test_sort_on_lists_of_random_integers():
     sort(items3)  # Mutate
     assert items3 == sorted_items3
 
+    # Generate list of 100 random integers from range [1...100]
+    items4 = random_ints(100, 1, 100)
+    sorted_items4 = sorted(items4)  # Copy
+    sort(items4)  # Mutate
+    assert items4 == sorted_items4
+
 
 def test_sort_on_small_lists_of_strings():
     items1 = ['A']
@@ -86,6 +104,10 @@ def test_sort_on_small_lists_of_strings():
     sort(items3)
     assert items3 == ['A', 'B', 'C']
 
+    items4 = ['B', 'C', 'X', 'A', 'Z']
+    sort(items4)
+    assert items4 == ['A', 'B', 'C', 'X', 'Z']
+
 
 def test_sort_on_fish_book_title():
     items = 'one fish two fish red fish blue fish'.split()
@@ -96,6 +118,29 @@ def test_sort_on_fish_book_title():
 
 def test_sort_on_seven_dwarf_names():
     items = 'Doc Grumpy Happy Sleepy Bashful Sneezy Dopey'.split()
+    sorted_items = sorted(items)  # Copy
+    sort(items)  # Mutate
+    assert items == sorted_items
+
+
+def test_sort_on_tolstoy_war_and_peace():
+    items = """But Count Rastopchin, who now shamed those who were leaving, now evacuated government offices, now 
+    distributed good-for-nothing weapons among the drunken riffraff, now took up icons, now forbade Augustin to 
+    evacuate relics and icons, now confiscated all private carts, now transported the hot-air balloon constructed by 
+    Leppich on a hundred and thirty-six carts, now hinted that he would burn Moscow, now told how he had burned his own 
+    house and wrote a proclamation to the French in which he solemnly reproached them for destroying his orphanage; 
+    now he assumed the glory of having burned Moscow, now he renounced it, now he ordered the people to catch all the 
+    spies and bring them to him, now he reproached the people for it, now he banished all the French from Moscow, now 
+    he allowed Mme Aubert-Chalmet, the center of all the French population of all Moscow, to remain in the city and 
+    ordered the old and venerable postmaster general Klyucharev, who had done nothing particularly wrong, to be 
+    arrested and exiled; now he gathered the people on the Three Hills to fight the French, now, in order to be rid of 
+    those same people, he turned them loose to murder a man and escaped through a back gate himself; now he said he would 
+    not survive the misfortune of Moscow, now he wrote French verses in an album about his part in the affair—this man did 
+    not understand the meaning of the event that was taking place, but only wanted to do something himself, to astonish someone 
+    or other, to accomplish something patriotically heroic, and, like a boy, frolicked over the majestic and inevitable event 
+    of the abandoning and burning of Moscow, and tried with his little hand now to encourage, now to stem the flow of the enormous 
+    current of people which carried him along with it.""".replace(',', '').split()
+    # One of the longest sentences ever written, testing just for fun :)
     sorted_items = sorted(items)  # Copy
     sort(items)  # Mutate
     assert items == sorted_items
