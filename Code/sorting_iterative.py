@@ -4,7 +4,7 @@
 def is_sorted(items):
     """
     Return a boolean indicating whether given items are in sorted order.
-    TODO: Running time: O(n log()n) in both average and worst case. Python's build in 'sorted' function is called Timsort (adaptive merge sort).
+    TODO: Running time: O(n log(n)) in both average and worst case. Python's built in 'sorted' function is called Timsort (adaptive merge sort).
     TODO: Memory usage: Worst case is O(n) and best case is O(1). Timsort uses n//2 pointers and up to 2*n extra bytes which becomes n.
     """
     # TODO: Check that all adjacent items are in order, return early if so
