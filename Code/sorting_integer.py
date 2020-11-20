@@ -24,7 +24,7 @@ def counting_sort(numbers):
     for write_val in range(m):
         for _ in range(count[write_val]):
             numbers[write_pos] = write_val 
-            wirte_pos += 1
+            write_pos += 1
 
 
 def bucket_sort(numbers, num_buckets=10):
